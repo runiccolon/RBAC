@@ -30,9 +30,15 @@ class RbacMiddleware(MiddlewareMixin):
         # 3. 进行权限校验
         flag = False
         for item in permission_list:
-            reg = "^%s$" % item.get('permissions__url')
+            id = item['id']
+            pid = item['pid']
+            reg = "^%s$" % item.get('url')
             if re.match(reg, current_url):
                 flag = True
+                if pid:
+                    request.current_menu_id = pid
+                else:
+                    request.current_menu_id = id
                 break
         if not flag:
             return HttpResponse('无权访问')

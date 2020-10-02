@@ -19,6 +19,7 @@ class Permission(models.Model):
     title = models.CharField(verbose_name='标题', max_length=32)
     url = models.CharField(verbose_name='含正则的URL', max_length=128)
 
+    parent = models.ForeignKey(verbose_name='父权限', to='Permission', null=True, blank=True, on_delete=models.CASCADE)
     menu = models.ForeignKey(verbose_name='菜单', to='Menu', null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):

@@ -2,6 +2,7 @@ from django.template import Library
 from django.conf import settings
 import re
 from collections import OrderedDict
+
 register = Library()
 
 
@@ -25,14 +26,16 @@ def menu(request):
                 node['class'] = 'active'
                 menu_dict[key]['class'] = ''
 
-    return {'menu_dict':ordered_dict}
+    return {'menu_dict': ordered_dict}
+
 
 @register.inclusion_tag('rbac/breadcrumb.html')
 def breadcrumb(request):
-    return {'breadcrumb_list':request.breadcrumb_list}
+    return {'breadcrumb_list': request.breadcrumb_list}
+
 
 @register.filter
-def has_permission(request,name):
+def has_permission(request, name):
     permission_dict = request.session.get(settings.PERMISSION_SESSION_KEY)
     if name in permission_dict:
         return True
