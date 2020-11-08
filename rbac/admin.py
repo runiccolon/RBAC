@@ -5,8 +5,8 @@ admin.site.register(models.Menu)
 
 
 class PermissionAdmin(admin.ModelAdmin):
-    list_display = ['title', 'url']
-    list_editable = ['url']
+    list_display = ['title', 'url', 'name']
+    list_editable = ['url', 'name']
 
 
 admin.site.register(models.Permission, PermissionAdmin)
